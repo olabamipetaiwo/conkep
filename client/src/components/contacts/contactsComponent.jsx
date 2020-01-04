@@ -4,23 +4,14 @@ import ContactItem from './contactItemComponent';
 import {CSSTransition,TransitionGroup} from 'react-transition-group';
 import AuthContext from '../../context/auth/authContext';
 import ContactContext from '../../context/contact/contactContext';
-import AlertContext from '../../context/alert/alertContext';
 
 const Contacts =() => {
     const authContext = useContext(AuthContext);
-    const alertContext = useContext(AlertContext);
-
-    const {alerts,setAlert,removeAlert} = alertContext;
     const {user,token} = authContext;
     const contactContext = useContext(ContactContext);
-    const {contactErrorFlag, contactError, clearContactErrors,contacts,filtered} = contactContext;
-
-    useEffect(() => {
-        if(contactErrorFlag) {
-          setAlert(contactError,'danger');
-          clearContactErrors();
-        }
-    },[contactError,contactErrorFlag]);
+    const {contacts,filtered} = contactContext;
+    const t = "tee";
+    const d = "dee";
 
 
     if(contacts.length == 0) {
@@ -42,20 +33,10 @@ const Contacts =() => {
                     {
                       filtered != null ?
                         filtered.map((contact,index) => (
-                            <CSSTransition
-                              key={contact.id}
-                              timeout="300"
-                              className="item">
-                              <ContactItem key={index} contact={contact} />
-                            </CSSTransition>
+                            <ContactItem key={index} contact={contact} />
                         )):
                         contacts.map((contact,index) => (
-                          <CSSTransition
-                              key={contact.id}
-                              timeout="300"
-                              className="item">
-                                    <ContactItem key={index} contact={contact} />
-                              </CSSTransition>
+                          <ContactItem key={index} contact={contact} />
                          ))
                     }
                     </tbody>
