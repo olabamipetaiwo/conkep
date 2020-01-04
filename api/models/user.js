@@ -23,16 +23,5 @@ const UserSchema = Schema({
     }
 });
 
-// userSchema.methods.encryptPassword = (password) => {
-//     return bcrypt.hash(password,salt);
-// };
-
-// userSchema.methods.validatePassword = (password,encryptedPassword) => {
-//     return bcrypt.compare(password,encryptedPassword);
-// };
-
-
-
-
 module.exports = mongoose.model('user', UserSchema);
 
